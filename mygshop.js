@@ -1,14 +1,19 @@
+
+
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const { stringify } = require("querystring");
 
 const products = ["Rolex", "Nike", "GUCCI"];
 let results = [];
+const io = require("socket.io-client");
+const socket = io.connect("http://localhost:3000");
 
 
 const scrape = async () => {
   try {
     const browser = await puppeteer.launch({ headless: false });
+    
 
     const page = await browser.newPage();
 
@@ -36,6 +41,7 @@ const scrape = async () => {
       }
 
       results.push({ name: products[i], url: firsturl });
+      socket.emit("gshops", firsturl);
       
     }
 
