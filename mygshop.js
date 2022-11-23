@@ -14,7 +14,6 @@ const scrape = async () => {
   try {
     const browser = await puppeteer.launch({ headless: false });
     
-
     const page = await browser.newPage();
 
     for (let i = 0; i < products.length; i++) {
